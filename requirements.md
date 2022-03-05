@@ -6,7 +6,8 @@
     [] nome
     [] email
     [] senha
-[] Criaçao de container mongo-express para a visualização dos dados
+[x] Criaçao de container mongo-express para a visualização dos dados
+[] Criação de um usuário para validar a funcionalidade
 
 [] Criação de um microserviço (core-api) para a criação de usuários
   [] Somente é possível um usuário com um único email
