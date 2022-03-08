@@ -41,7 +41,6 @@ services:
     - bubble
     depends_on:
     - zookeeper.social-feed.dev
-
 networks:
   bubble:
     external: true

@@ -13,7 +13,7 @@ export const createUser = async (userData: UserDTO): Promise<User> => {
     password,
   });
 
-  await createUserRepository.save(user);
+  // await createUserRepository.save(user);
 
   return user;
 };

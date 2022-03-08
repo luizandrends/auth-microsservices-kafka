@@ -17,8 +17,8 @@
   [x] Senha criptografada
   [] Resolver bug da porta do kafka
 
-[] Criação de tópico load-login-database
-  [] Criar tópico load-login-database
+[x] Criação de tópico load-login-database
+  [x] Criar tópico load-login-database
 
 [] Criação de microserviço para o carregamento de dados necessários para o login
   [] Criar serviço auth-ms-login-database-upload

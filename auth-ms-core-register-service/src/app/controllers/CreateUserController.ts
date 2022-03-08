@@ -19,16 +19,14 @@ class CreateUserController {
 
     const user = await createUser({ name, email, password: hashedPassword });
 
-    const event = await sendEvent({
+    await sendEvent({
       kafka: {
-        topicName: 'test-topic',
+        topicName: 'auth-load-login-database',
       },
       name,
       email,
       password: hashedPassword,
     });
-
-    console.log(event);
 
     return response.json(user);
   }
