@@ -14,6 +14,7 @@ export const sendEvent = async (
   payload: EventPayloadValue
 ): Promise<RecordMetadata[]> => {
   const producer = kafka.producer();
+
   await producer.connect();
 
   const parsedPayload = JSON.stringify(payload);
