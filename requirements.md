@@ -1,18 +1,33 @@
 # Requisitos do projeto
 
 
-[] Criação de container mongo dentro do docker-compose
+[x] Criação de database mongo
     [x] Criar database
-    [] nome
-    [] email
-    [] senha
-[x] Criaçao de container mongo-express para a visualização dos dados
-[] Criação de um usuário para validar a funcionalidade
+    [x] nome
+    [x] email
+    [x] senha
+[x] Criação de um usuário para validar a funcionalidade
 
-[] Criação de um microserviço (core-api) para a criação de usuários
-  [] Somente é possível um usuário com um único email
-  [] Senha criptografada
+[x] Criação de docker-compose para o kafka
+  [x] Criar container para o kafka
+  [x] Conseguir criar tópicos com a interface
 
-[] Criação de docker-compose para o kafka
-  [] Criar container para o kafka
-  [] Criar tópico 
+[x] Criação de um microserviço (core-api) para a criação de usuários
+  [x] Somente é possível um usuário com um único email
+  [x] Senha criptografada
+  [] Resolver bug da porta do kafka
+
+[] Criação de tópico load-login-database
+  [] Criar tópico load-login-database
+
+[] Criação de microserviço para o carregamento de dados necessários para o login
+  [] Criar serviço auth-ms-login-database-upload
+  [] Receber mensagens do tópico load-login-database
+  [] Salvar e-mail e senha na database
+
+[] Criação de microserviço para login
+  [] Gerar token JWT
+  [] Desencriptar senha com o BCryptJS
+
+
+

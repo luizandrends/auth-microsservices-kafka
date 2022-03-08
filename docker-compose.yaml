@@ -1,34 +1,49 @@
-version: "3.7"
+version: '3.5'
 services:
-  mongo:
-    image: mongo:latest
-    container_name: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
+  zookeeper.social-feed.dev:
+    container_name: zookeeper.social-feed.dev
+    image: confluentinc/cp-zookeeper:5.4.0
     ports:
-      - "0.0.0.0:27017:27017"
+      - 2181:2181
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
     volumes:
-      - type: volume
-        source: MONGO_DATA
-        target: /data/db
-      - type: volume
-        source: MONGO_CONFIG
-        target: /data/configdb
-  mongo-express:
-    image: mongo-express:latest
-    container_name: mongo-express
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-      ME_CONFIG_MONGODB_SERVER: mongo
-      ME_CONFIG_MONGODB_PORT: "27017"
+      - zookeeper.social.feed:/data
+      - zookeeper.social.feed:/datalog
+    networks:
+      - bubble
+  kafka.social-feed.dev:
+    container_name: kafka.social-feed.dev
+    image: confluentinc/cp-kafka:5.4.0
     ports:
-      - "0.0.0.0:8081:8081"
+      - 29092:29092
     depends_on:
-      - mongo
+      - zookeeper.social-feed.dev
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper.social-feed.dev:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka.social-feed.dev:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+    networks:
+      - bubble
+  kafka-manager:
+    container_name: kafka-manager
+    image: sheepkiller/kafka-manager@sha256:615f3b99d38aba2d5fdb3fb750a5990ba9260c8fb3fd29c7e776e8c150518b78
+    ports:
+      - 9000:9000
+    environment:
+      ZK_HOSTS: zookeeper.social-feed.dev:2181
+    networks:
+    - bubble
+    depends_on:
+    - zookeeper.social-feed.dev
+
+networks:
+  bubble:
+    external: true
 volumes:
-  MONGO_DATA:
-    name: MONGO_DATA
-  MONGO_CONFIG:
-    name: MONGO_CONFIG
+  zookeeper.social.feed:

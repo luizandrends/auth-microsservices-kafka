@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import AppError from '../../errors/AppError';
 
 import { findByEmail, createUser } from '../useCases/users';
+import { sendEvent } from '../useCases/kafka/producers';
 import { generateHash } from '../providers/BCrypt';
 
 class CreateUserController {
@@ -17,6 +18,17 @@ class CreateUserController {
     const hashedPassword = await generateHash(password);
 
     const user = await createUser({ name, email, password: hashedPassword });
+
+    const event = await sendEvent({
+      kafka: {
+        topicName: 'test-topic',
+      },
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    console.log(event);
 
     return response.json(user);
   }
