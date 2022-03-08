@@ -13,8 +13,6 @@ export const init = async () => {
     eachMessage: async ({ message }) => {
       const value = message.value?.toString();
 
-      console.log(value);
-
       createUserController.create(value);
     },
   });

@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('auth-login')
-class User {
+class AuthLogin {
   @ObjectIdColumn()
   id: ObjectID;
 
@@ -28,4 +28,4 @@ class User {
   updated_at: Date;
 }
 
-export default User;
+export default AuthLogin;
