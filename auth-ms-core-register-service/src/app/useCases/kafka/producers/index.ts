@@ -5,7 +5,7 @@ interface EventPayloadValue {
   kafka: {
     topicName: string;
   };
-  name: string;
+  userId: any;
   email: string;
   password: string;
 }
