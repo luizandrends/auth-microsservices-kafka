@@ -7,7 +7,7 @@ import {
   ObjectIdColumn,
 } from 'typeorm';
 
-@Entity('users')
+@Entity('auth-register')
 class User {
   @ObjectIdColumn()
   id: ObjectID;

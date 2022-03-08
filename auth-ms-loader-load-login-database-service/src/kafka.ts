@@ -2,7 +2,7 @@ import { consumer } from './app';
 
 import CreateUserController from './app/controllers/CreateUserController';
 
-export const init = async () => {
+export const init = async (): Promise<void> => {
   await consumer.connect();
 
   await consumer.subscribe({ topic: 'auth-load-login-database' });
