@@ -1,11 +1,21 @@
 FROM node:12-alpine
 
-WORKDIR /usr/app
+WORKDIR /usr/src/app
 
-COPY package.json .
+COPY . ./
 
-EXPOSE PORT
+RUN apk update && apk add \
+    curl \
+    yarn
 
-RUN npm install --quiet
+RUN yarn install --production
 
-COPY . .
+RUN yarn build
+
+EXPOSE 3334
+
+COPY ./dist ./
+
+COPY docker-entrypoint.sh ./
+RUN chmod +x docker-entrypoint.sh
+ENTRYPOINT ["./docker-entrypoint.sh"]

@@ -23,7 +23,11 @@ yarn-error.log*
 /.idea
 dist/
 
+# npm
 package-lock.json
+
+#yarn
+yarn.lock
 
 # database
 ormconfig.json

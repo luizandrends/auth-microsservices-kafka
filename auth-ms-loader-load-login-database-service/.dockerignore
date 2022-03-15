@@ -1,0 +1,7 @@
+node_modules
+.eslintignore
+.eslintrc.json
+.eslintrc
+.gitignore
+.git
+docker-compose
