@@ -1,0 +1,14 @@
+service:
+  name: ms-register-service-svc
+  type: NodePort
+  app: ms-register-service
+  protocol: TCP
+  port: 80
+  targetPort: 3333
+api:
+  name: ms-register-service
+  label: ms-register-service
+  replicas: 3
+  image: luizandrends/auth-ms-core-register-service:latest
+  imagePullPolicy: Always
+  containerPort: 3333
