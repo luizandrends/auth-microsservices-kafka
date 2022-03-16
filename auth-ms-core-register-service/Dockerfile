@@ -1,6 +1,7 @@
 FROM node:12-alpine
 
 WORKDIR /usr/src/app
+ENV NODE_ENV=production
 
 COPY . ./
 
@@ -12,7 +13,7 @@ RUN yarn install --production
 
 RUN yarn build
 
-EXPOSE 3334
+EXPOSE 3333
 
 COPY ./dist ./
 

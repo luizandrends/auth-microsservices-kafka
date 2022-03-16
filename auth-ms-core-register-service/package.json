@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --ignore-watch node_modules --transpile-only src/index --setupFiles dotenv/config",
-    "start": "node ./dist/index",
+    "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --ignore-watch node_modules --transpile-only src/index --setupFiles NODE_ENV=development dotenv/config",
+    "start": "node dist/index",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "build": "babel src --extensions  \".js,.ts\" --out-dir dist --copy-files",
     "test": "jest"
